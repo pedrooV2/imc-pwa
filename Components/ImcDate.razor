@@ -1,0 +1,37 @@
+<span>
+    <small>@CreatedAt.ToString("dd/MM/yyyy")</small>
+    <small>@CreatedThere()</small>
+</span>
+
+@code {
+
+    [Parameter]
+    [EditorRequired]
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+    private string CreatedThere()
+    {
+        var duration = (DateTime.Now - CreatedAt);
+
+        return duration switch
+        {
+            var result when duration.TotalSeconds < 60 => $@"Criado há {duration.Seconds} segundo(s)",
+            var result when duration.TotalMinutes < 60 => $@"Criado há {duration.Minutes} minuto(s)",
+            var result when duration.TotalHours < 24 => $@"Criado há {duration.Hours} hora(s)",
+            _ => $@"Criado há {duration.TotalDays} dia(s)"
+        };
+
+        /*
+        if (duration.TotalSeconds < 60)
+        return $@"Criado há {duration.TotalSeconds} segundos";
+
+        if (duration.TotalMinutes < 60)
+        return $@"Criado há {duration.ToString(@"mm\:ss")} minutos";
+
+        if (duration.TotalHours < 24)
+        return $@"Criado há {duration.ToString(@"hh\mm\:ss")} horas";
+
+        return $@"Criado há {duration.TotalDays} dia(s)";
+        */
+    }
+}
