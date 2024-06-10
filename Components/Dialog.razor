@@ -28,7 +28,7 @@
     public async Task HideModalAsync()
     {
         await JsRuntime.InvokeVoidAsync("hideModal", "result-dialog");
-        NavigationManager.NavigateTo("/#history");
+        NavigationManager.NavigateTo("/imc-pwa/#history");
         await OnModalHideCallBack.InvokeAsync();
     }
 }
